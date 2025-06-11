@@ -53,7 +53,7 @@ export const SectionId = {
   About: 'about',
   Contact: 'contact',
   Portfolio: 'portfolio',
-  Resume: 'services',
+  Resume: 'resume',
   Skills: 'skills',
   Stats: 'stats',
   Testimonials: 'testimonials',
@@ -101,7 +101,7 @@ export const heroData: Hero = {
     {
       href: `#${SectionId.Contact}`,
       text: 'Contact',
-      primary: true,
+      primary: false,
     },
   ],
 };

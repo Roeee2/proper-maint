@@ -98,12 +98,7 @@ export interface TimelineItem {
   title: string;
   content: JSX.Element;
 }
-export interface TimelineItem2 {
-  date: string;
-  location: string;
-  title: string;
-  content: JSX.Element;
-}
+
 /**
  * Testimonial section
  */
