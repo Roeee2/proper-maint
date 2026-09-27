@@ -369,7 +369,7 @@ export const testimonial: TestimonialSection = {
   imageSrc: testimonialImage,
   testimonials: [
     {
-      name: 'Marcelina Kamińska',
+      name: 'Marcelina Kaminska',
       text: 'The attention to detail was outstanding and the end result exceeded my expectations. I would highly recommend this company to anyone looking for a professional and reliable tiling service',
       image: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/169.jpg',
     },

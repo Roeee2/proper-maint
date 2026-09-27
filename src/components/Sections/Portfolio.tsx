@@ -1,84 +1,71 @@
-import {ExternalLinkIcon} from '@heroicons/react/outline';
-import classNames from 'classnames';
 import Image from 'next/image';
-import {FC, memo, MouseEvent, useCallback, useEffect, useRef, useState} from 'react';
+import {FC, memo, useCallback, useState} from 'react';
 
-import {isMobile} from '../../config';
 import {portfolioItems, SectionId} from '../../data/data';
-import {PortfolioItem} from '../../data/dataDef';
-import useDetectOutsideClick from '../../hooks/useDetectOutsideClick';
+import ImageModal from '../ImageModal';
 import Section from '../Layout/Section';
 
 const Portfolio: FC = memo(() => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const openModal = useCallback((index: number) => {
+    setCurrentIndex(index);
+    setIsOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const nextImage = useCallback(() => {
+    setCurrentIndex(prev => (prev + 1) % portfolioItems.length);
+  }, []);
+
+  const prevImage = useCallback(() => {
+    setCurrentIndex(prev => (prev === 0 ? portfolioItems.length - 1 : prev - 1));
+  }, []);
+
+  const {image, title, description} = portfolioItems[currentIndex];
+
   return (
-    <Section className="bg-neutral-800" sectionId={SectionId.Portfolio}>
+    <Section sectionId={SectionId.Portfolio}>
       <div className="flex flex-col gap-y-8">
         <h2 className="self-center text-xl font-bold text-white">Check out some of our work</h2>
-        <div className=" w-full columns-2 md:columns-3 lg:columns-4">
-          {portfolioItems.map((item, index) => {
-            const {title, image} = item;
-            return (
-              <div className="pb-6" key={`${title}-${index}`}>
-                <div
-                  className={classNames(
-                    'relative h-max w-full overflow-hidden rounded-lg shadow-lg shadow-black/30 lg:shadow-xl',
-                  )}>
-                  <Image alt={title} layout="responsive" placeholder="blur" src={image} />
-                  <ItemOverlay item={item} />
+
+        <div className="w-full columns-2 md:columns-3 lg:columns-4">
+          {portfolioItems.map((item, index) => (
+            <div className="pb-6" key={`${item.title}-${index}`}>
+              <div
+                className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer shadow-black/30 lg:shadow-xl"
+                onClick={() => openModal(index)}>
+                <Image alt={item.title} layout="responsive" placeholder="blur" src={item.image} />
+
+                <div className="absolute inset-0 transition-opacity duration-300 bg-black opacity-0 bg-opacity-60 hover:opacity-100">
+                  <div className="flex flex-col items-center justify-center w-full h-full p-4 text-center text-white">
+                    <h3 className="mb-2 text-lg font-bold">{item.title}</h3>
+                    <p className="text-sm">{item.description}</p>
+                  </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
+
+        <ImageModal
+          description={description}
+          imageUrl={typeof image === 'string' ? image : image.src}
+          isOpen={isOpen}
+          onClose={closeModal}
+          onNext={nextImage}
+          onPrev={prevImage}
+          title={title}
+        />
       </div>
     </Section>
   );
 });
 
 Portfolio.displayName = 'Portfolio';
+
 export default Portfolio;
-
-const ItemOverlay: FC<{item: PortfolioItem}> = memo(({item: {url, title, description}}) => {
-  const [mobile, setMobile] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
-  const linkRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    // Avoid hydration styling errors by setting mobile in useEffect
-    if (isMobile) {
-      setMobile(true);
-    }
-  }, []);
-  useDetectOutsideClick(linkRef, () => setShowOverlay(false));
-
-  const handleItemClick = useCallback(
-    (event: MouseEvent<HTMLElement>) => {
-      if (mobile && !showOverlay) {
-        event.preventDefault();
-        setShowOverlay(!showOverlay);
-      }
-    },
-    [mobile, showOverlay],
-  );
-
-  return (
-    <a
-      className={classNames(
-        'absolute inset-0 h-full w-full  bg-gray-900 transition-all duration-300',
-        {'opacity-0 hover:opacity-80': !mobile},
-        showOverlay ? 'opacity-80' : 'opacity-0',
-      )}
-      href={url}
-      onClick={handleItemClick}
-      ref={linkRef}
-      target="_blank">
-      <div className="relative h-full w-full p-4">
-        <div className="flex h-full w-full flex-col gap-y-2 overflow-y-auto">
-          <h2 className="text-center font-bold text-white opacity-100">{title}</h2>
-          <p className="text-xs text-white opacity-100 sm:text-sm">{description}</p>
-        </div>
-        <ExternalLinkIcon className="absolute bottom-1 right-1 h-4 w-4 shrink-0 text-white sm:bottom-2 sm:right-2" />
-      </div>
-    </a>
-  );
-});
