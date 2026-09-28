@@ -37,12 +37,12 @@ const Portfolio: FC = memo(() => {
           {portfolioItems.map((item, index) => (
             <div className="pb-6" key={`${item.title}-${index}`}>
               <div
-                className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer shadow-black/30 lg:shadow-xl"
+                className="relative cursor-pointer overflow-hidden rounded-lg shadow-lg shadow-black/30 lg:shadow-xl"
                 onClick={() => openModal(index)}>
                 <Image alt={item.title} layout="responsive" placeholder="blur" src={item.image} />
 
-                <div className="absolute inset-0 transition-opacity duration-300 bg-black opacity-0 bg-opacity-60 hover:opacity-100">
-                  <div className="flex flex-col items-center justify-center w-full h-full p-4 text-center text-white">
+                <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 transition-opacity duration-300 hover:opacity-100">
+                  <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center text-white">
                     <h3 className="mb-2 text-lg font-bold">{item.title}</h3>
                     <p className="text-sm">{item.description}</p>
                   </div>
