@@ -143,9 +143,10 @@ export const portfolioItems: PortfolioItem[] = [
     image: porfolioImage1,
   },
   {
-    title: 'Project title 2',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    title: 'Split-face stone cladding, Carbis Bay',
+    description:
+      'Natural split-face stone panels installed at a Carbis Bay hotel, adding texture, depth and a distinctive architectural finish to the exterior.',
+    url: 'porfolioImage2.src',
     image: porfolioImage2,
   },
   {
@@ -155,9 +156,10 @@ export const portfolioItems: PortfolioItem[] = [
     image: porfolioImage3,
   },
   {
-    title: 'Project title 4',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    title: 'Bespoke hexagonal & wood-effect tiling',
+    description:
+      'A bespoke floor design for a new home, combining striking black hexagonal tiles with warm wood-effect planks to create a distinctive, contemporary finish.',
+    url: 'porfolioImage4.src',
     image: porfolioImage4,
   },
   {
@@ -179,9 +181,10 @@ export const portfolioItems: PortfolioItem[] = [
     image: porfolioImage7,
   },
   {
-    title: 'Project title 8',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    title: 'Caravan deep clean & restoration',
+    description:
+      'A complete deep clean for a newly purchased caravan, transforming a tired interior and bringing the property back to an immaculate, move-in-ready condition.',
+    url: 'porfolioImage8.src',
     image: porfolioImage8,
   },
   {
@@ -191,9 +194,10 @@ export const portfolioItems: PortfolioItem[] = [
     image: porfolioImage9,
   },
   {
-    title: 'Project title 10',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    title: 'Luxury wood-effect plank tiles — Carbis Bay',
+    description:
+      'A luxury Carbis Bay property finished with beautiful wood-effect plank tiles throughout the living room and kitchen, creating a warm, seamless and contemporary finish.',
+    url: 'porfolioImage10.src',
     image: porfolioImage10,
   },
   {

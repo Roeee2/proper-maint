@@ -43,7 +43,7 @@ const Portfolio: FC = memo(() => {
 
                 <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 transition-opacity duration-300 hover:opacity-100">
                   <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center text-white">
-                    <h3 className="mb-2 text-lg font-bold">{item.title}</h3>
+                    <h3 className="text-md mb-2 font-semibold">{item.title}</h3>
                     <p className="text-sm">{item.description}</p>
                   </div>
                 </div>
